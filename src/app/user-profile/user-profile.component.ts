@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DirectorCardComponent } from '../director-card/director-card.component';
 import { EditProfileComponent } from '../edit-profile/edit-profile.component';
-import { FetchApiDataService } from '../fetch-api-data.service';
+import { FetchApiDataService, User } from '../fetch-api-data.service';
 import { GenreCardComponent } from '../genre-card/genre-card.component';
 import { MovieDetailCardComponent } from '../movie-detail-card/movie-detail-card.component';
 
@@ -33,20 +33,23 @@ export class UserProfileComponent implements OnInit {
 
   getUser(): void {
     const user = localStorage.getItem('user');
-    this.fetchApiData.getUser(user).subscribe((resp: any) => {
-      this.user = resp;
-      console.log(this.user);
-      return this.user
-    });
+    if (user) {
+      this.fetchApiData.getUser(user).subscribe((resp: User) => {
+        this.user = resp;
+        console.log(this.user);
+
+      });
+    }
   }
 
   getFav(): void {
     const user = localStorage.getItem('user');
-    this.fetchApiData.getUser(user).subscribe((resp: any) => {
-      this.favorites = resp.FavoriteMovies;
-      console.log(this.favorites);
-      return this.filterMovies();
-    });
+    if (user) {
+      this.fetchApiData.getUser(user).subscribe((resp: any) => {
+        this.favorites = resp.FavoriteMovies;
+        console.log(this.favorites);
+      });
+    }
   }
 
   filterMovies(): void {
@@ -73,7 +76,7 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-  openDirectorDialog(name: string, bio: string, birth: any): void {
+  openDirectorDialog(name: string, bio: string, birth: Date): void {
     this.dialog.open(DirectorCardComponent, {
       data: {name, bio, birth},
     });

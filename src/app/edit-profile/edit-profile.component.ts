@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FetchApiDataService } from '../fetch-api-data.service';
+import { FetchApiDataService, User } from '../fetch-api-data.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -13,10 +13,12 @@ export class EditProfileComponent implements OnInit {
   user: any = {};
 
   @Input() userData = {
-    Name: this.user.Name, 
+    Username: this.user.Username, 
     Password: this.user.Password, 
     Email: this.user.Email, 
-    Birthday: this.user.Birthday
+    Birthday: this.user.Birthday,
+    _id: this.user._id,
+    FavoriteMovies: this.user.FavoriteMovies,
   };
 
   constructor(
@@ -31,27 +33,27 @@ export class EditProfileComponent implements OnInit {
 
   getUser(): void {
     const user = localStorage.getItem('user');
-    this.fetchApiData.getUser(user).subscribe((resp: any) => {
-      this.user = resp;
-      console.log(this.user);
-      return this.user;
-    })
+    if (user) {
+      this.fetchApiData.getUser(user).subscribe((resp: User) => {
+        this.user = resp;
+        console.log(this.user);
+    })}
   }
 
   editUserProfile(): void {
-    this.fetchApiData.editUser(this.userData).subscribe((result: any) => {
+    this.fetchApiData.editUser(this.userData).subscribe((result: User) => {
       console.log(result);
       this.dialogRef.close();
       this.snackBar.open("You have updated your profile", "OK", {
         duration: 4000
       });
-      localStorage.setItem('user', result.Name);
-    }), (result: any) => {
+      localStorage.setItem('user', result.Username);
+    }, (result: any) => {
       console.log(result);
       this.snackBar.open('Something went wrong. Please try again', 'OK', {
         duration: 4000
       });
-    }
+    })
   }
 
 

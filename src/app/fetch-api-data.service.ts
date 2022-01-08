@@ -6,6 +6,31 @@ import { Observable, throwError } from 'rxjs';
 // Declaring the api url that will provide data for the client app
 const apiUrl = 'https://favflix.herokuapp.com/';
 
+export interface User {
+  _id: string,
+  FavoriteMovies: Array<string>,
+  Username: string,
+  Birthday: Date,
+  Email: string,
+}
+
+export interface Movie {
+  _id: string,
+  Title: string,
+  Description: string,
+  Genre: {
+    Name: string,
+    Description: string
+  },
+  Director: {
+    Name: string,
+    Birth: Date,
+    Bio: string,
+    Death: string
+  },
+  ImagePath: string,
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,14 +61,17 @@ export class FetchApiDataService {
   // Making the api call for getting all movies
   getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.get(apiUrl + 'movies', {
+    return this.http.get<Array<Movie>>(apiUrl + 'movies', {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
         })
     }).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
+      map((x: Movie[]) => {
+        return x.map((x: Movie) => {
+          x.Director.Birth = new Date(x.Director.Birth);
+        })
+      })
     );
   }
 
@@ -90,9 +118,9 @@ export class FetchApiDataService {
   }
 
   // Making the API call for getting user information
-  getUser(username: any): Observable<any> {
+  getUser(username: string): Observable<User> {
     const token = localStorage.getItem('token');
-    return this.http.get(apiUrl + 'users/' + username, {
+    return this.http.get<User>(apiUrl + 'users/' + username, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
@@ -133,7 +161,7 @@ export class FetchApiDataService {
   }
 
   // Making the API call for editing user profile
-  editUser(userDetails:any): Observable<any> {
+  editUser(userDetails:User): Observable<any> {
     const username = localStorage.getItem('username')
     const token = localStorage.getItem('token');
     return this.http.put(apiUrl + 'users/' + username, userDetails, {
@@ -183,7 +211,7 @@ export class FetchApiDataService {
     return body || { };
   }
 
-  private handleError(error: HttpErrorResponse): any {
+  private handleError(error: HttpErrorResponse): Observable<never> {
     if (error.error instanceof ErrorEvent) {
       console.error('Some error occurred:', error.error.message);
     } else {
