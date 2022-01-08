@@ -1,6 +1,10 @@
 .main-page {
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
+  background-color: #eee;
+  border-radius: 20px;
+  padding: 40px 50px;
+  h1 {
+    margin: 0;
+    margin-bottom: 20px;
+  }
 }

@@ -46,6 +46,7 @@ export class UserRegistrationFormComponent implements OnInit {
         duration: 4000
       });
     }, (result) => {
+      console.log(result);
       this.snackBar.open("Sorry we couldn't register you. Please try a different username", 'OK', {
         duration: 4000
       });
