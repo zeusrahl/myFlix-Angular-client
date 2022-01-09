@@ -10,8 +10,8 @@ export interface User {
   _id: string,
   FavoriteMovies: Array<string>,
   Username: string,
-  Birthday: Date,
   Email: string,
+  Birthday: Date,
 }
 
 export interface Movie {
@@ -24,8 +24,8 @@ export interface Movie {
   },
   Director: {
     Name: string,
-    Birth: Date,
     Bio: string,
+    Birth: string,
     Death: string
   },
   ImagePath: string,
@@ -67,13 +67,11 @@ export class FetchApiDataService {
           Authorization: 'Bearer ' + token,
         })
     }).pipe(
-      map((x: Movie[]) => {
-        return x.map((x: Movie) => {
-          x.Director.Birth = new Date(x.Director.Birth);
-        })
-      })
-    );
+      map(this.extractResponseData),
+      catchError(this.handleError)
+      );
   }
+  
 
   //  Making the api call for calling a single movie
   getMovie(title: any): Observable<any> {
@@ -132,7 +130,7 @@ export class FetchApiDataService {
   }
 
     // Making the API call for calling a list of the user's favorite movies
-  getFavoriteMovies(username:any): Observable<any> {
+  public getFavoriteMovies(username:any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'users/' + username + '/movies', {
       headers: new HttpHeaders(

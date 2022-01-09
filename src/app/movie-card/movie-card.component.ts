@@ -51,7 +51,7 @@ export class MovieCardComponent implements OnInit {
     })
   }
 
-  openDirectorDialog(name: string, bio: string, birth: Date): void {
+  openDirectorDialog(name: string, bio: string, birth: string): void {
     this.dialog.open(DirectorCardComponent, {
       data: {name, bio, birth},
     });
@@ -82,13 +82,14 @@ export class MovieCardComponent implements OnInit {
       this.snackBar.open(`You successfuly removed ${title} from your favorites list`, 'OK', {
         duration: 4000,
       });
+      this.ngOnInit();
     });
-    this.ngOnInit();
+   
     return this.getFav();
   }
 
   inFavorites(movieId: string): boolean {
-    if (this.favorites.indexOf(movieId) > -1) {
+    if (this.favorites.includes(movieId)) {
       return true;
     } else {
       return false;
