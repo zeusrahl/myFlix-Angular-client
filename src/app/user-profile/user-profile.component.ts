@@ -43,7 +43,7 @@ export class UserProfileComponent implements OnInit {
   getFav(): void {
     const user = localStorage.getItem('user');
     this.fetchApiData.getUser(user).subscribe((resp: any) => {
-      this.favorites = resp.FavoriteMovies;
+      this.favorites = resp.FavoriteMovies.map((x: any) => x._id);
       console.log(this.favorites);
       return this.filterMovies();
     });
