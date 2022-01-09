@@ -76,7 +76,7 @@ export class MovieCardComponent implements OnInit {
 
     this.fetchApiData.deleteMovie(movieId).subscribe((resp: any) => {
       console.log(resp);
-      this.snackBar.open(`You successfuly removed ${title} from your favorites list`, 'OK', {
+      this.snackBar.open(`You successfully removed ${title} from your favorites list`, 'OK', {
         duration: 4000,
       });
     });
