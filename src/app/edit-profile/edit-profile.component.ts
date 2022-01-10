@@ -13,7 +13,7 @@ export class EditProfileComponent implements OnInit {
   user: any = {};
 
   @Input() userData = {
-    Name: this.user.Name, 
+    Username: this.user.Username, 
     Password: this.user.Password, 
     Email: this.user.Email, 
     Birthday: this.user.Birthday
@@ -45,7 +45,7 @@ export class EditProfileComponent implements OnInit {
       this.snackBar.open("You have updated your profile", "OK", {
         duration: 4000
       });
-      localStorage.setItem('user', result.Name);
+      localStorage.setItem('user', result.Username);
     }), (result: any) => {
       console.log(result);
       this.snackBar.open('Something went wrong. Please try again', 'OK', {
