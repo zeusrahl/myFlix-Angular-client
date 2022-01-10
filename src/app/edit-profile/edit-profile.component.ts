@@ -39,7 +39,19 @@ export class EditProfileComponent implements OnInit {
   }
 
   editUserProfile(): void {
-    this.fetchApiData.editUser(this.userData).subscribe((result: any) => {
+    const updatedUserData = {
+      Username: !this.userData.Username
+        ? this.user.Username
+        : this.userData.Username,
+      Password: !this.userData.Password
+        ? this.user.Password
+        : this.userData.Password,
+      Email: !this.userData.Email ? this.user.Email : this.userData.Email,
+      Birthday: !this.userData.Birthday
+        ? this.user.Birthday
+        : this.userData.Birthday,
+    };
+    this.fetchApiData.editUser(updatedUserData).subscribe((result: any) => {
       console.log(result);
       this.dialogRef.close();
       this.snackBar.open("You have updated your profile", "OK", {

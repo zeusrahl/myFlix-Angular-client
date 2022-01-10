@@ -92,13 +92,14 @@ export class UserProfileComponent implements OnInit {
   }
 
   removeFavMovie(movieId: any, title: string): void {
-    const user = localStorage.getItem('user');
+
     this.fetchApiData.deleteMovie(movieId).subscribe((resp: any) => {
       console.log(resp);
-      this.snackBar.open(`You successfuly removed ${title} from your favorites list`, 'OK', {
+      this.snackBar.open(`You successfully removed ${title} from your favorites list`, 'OK', {
         duration: 4000,
       });
     });
     this.ngOnInit();
+    return this.getFav();
   }
 }
