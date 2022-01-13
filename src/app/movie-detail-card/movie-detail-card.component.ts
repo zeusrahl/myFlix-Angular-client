@@ -8,6 +8,11 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class MovieDetailCardComponent implements OnInit {
 
+  /**
+   * Constructor items are documents as properties
+   * @ignore
+   * @param data {object}
+   */
   constructor(@Inject(MAT_DIALOG_DATA)
     public data: {
       title: string,
@@ -15,6 +20,10 @@ export class MovieDetailCardComponent implements OnInit {
     }
   ) { }
 
+  /**
+   * Initiates the component
+   * @ignore
+   */
   ngOnInit(): void {
   }
 }

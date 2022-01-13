@@ -8,6 +8,11 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class GenreCardComponent implements OnInit {
 
+  /**
+   * Constructor items are documents as properties
+   * @ignore
+   * @param data 
+   */
   constructor(@Inject(MAT_DIALOG_DATA)
     public data: {
       name: string,
@@ -15,6 +20,10 @@ export class GenreCardComponent implements OnInit {
     }
   ) { }
 
+  /**
+   * Initializes the component
+   * @ignore
+   */
   ngOnInit(): void {
   }
 

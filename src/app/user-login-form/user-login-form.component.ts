@@ -15,7 +15,8 @@ export class UserLoginFormComponent implements OnInit {
   @Input() userData = { Username: '', Password: '' };
 
   /**
-   * Called when creating an instance of the class
+   * Constructor items are documents as properties
+   * @ignore
    * @param fetchApiData
    * @param dialogRef
    * @param snackBar
@@ -27,11 +28,16 @@ export class UserLoginFormComponent implements OnInit {
     public router: Router
   ) { }
 
+  /**
+   * Initiates the component
+   */
   ngOnInit(): void {
   }
 
+  /**
+   * Checks login with API, and set's localStorage if user exists
+   */
   loginUser(): void {
-    
     this.fetchApiData.userLogin(this.userData).subscribe((result) => {
       localStorage.setItem('user', result.user.Username);
       localStorage.setItem('token', result.token);

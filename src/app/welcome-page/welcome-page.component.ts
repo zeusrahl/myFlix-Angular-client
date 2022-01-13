@@ -10,15 +10,32 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class WelcomePageComponent implements OnInit {
 
+  /**
+   * Constructor items are documents as properties
+   * @ignore
+   * @param dialog 
+   */
   constructor(public dialog: MatDialog) { }
 
+
+  /**
+   * Initializes the component
+   */
   ngOnInit(): void {
   }
+
+  /**
+   * This is the function that opens the User Registration Model
+   */
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {
       width: '280px'
     });
   }
+
+  /**
+   * This is the function that sneds the 
+   */
   openUserLoginDialog(): void {
     this.dialog.open(UserLoginFormComponent, {
       width: '280px'

@@ -8,10 +8,19 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class DirectorCardComponent implements OnInit {
 
+  /**
+   * Constructor items are documents as properties
+   * @ignore
+   * @param data 
+   */
   constructor( @Inject(MAT_DIALOG_DATA)
     public data: { name: string, bio: string, birth: any }
   ) { }
 
+  /**
+   * Initializes the component
+   * @ignore
+   */
   ngOnInit(): void {
   }
 

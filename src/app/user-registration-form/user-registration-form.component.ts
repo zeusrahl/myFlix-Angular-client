@@ -24,7 +24,8 @@ export class UserRegistrationFormComponent implements OnInit {
     Birthday: ''
   };
   /**
-   * * Called when creating an instance of the class
+   * Constructor items are documents as properties
+   * @ignore
    * @param fetchApiData
    * @param dialogRef
    * @param snackBar
@@ -34,10 +35,12 @@ export class UserRegistrationFormComponent implements OnInit {
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
     public snackBar: MatSnackBar) { }
 
+  /**
+   * Initiliazes the component
+   */
   ngOnInit(): void {
   }
 
-  // This is the function responsible for sending the form inputs to the backend
   /**
    * Function for sending the form inputs to the backend to creat a new user
    * @returns alert indicating a successful registration or an error

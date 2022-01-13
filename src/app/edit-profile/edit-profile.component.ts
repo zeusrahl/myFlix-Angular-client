@@ -12,6 +12,9 @@ export class EditProfileComponent implements OnInit {
 
   user: any = {};
 
+  /**
+   * Binding input values to userData object
+   */
   @Input() userData = {
     Username: this.user.Username, 
     Password: this.user.Password, 
@@ -19,16 +22,30 @@ export class EditProfileComponent implements OnInit {
     Birthday: this.user.Birthday
   };
 
+  /**
+   * Constructor items are documents as properties
+   * @ignore
+   * @param fetchApiData 
+   * @param dialogRef 
+   * @param snackBar 
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<EditProfileComponent>,
     public snackBar: MatSnackBar
   ) { }
 
+  /**
+   * Initiliazes the component
+   * @ignore
+   */
   ngOnInit(): void {
     this.getUser();
   }
 
+  /**
+   * Retrieves userData from localStorage
+   */
   getUser(): void {
     const user = localStorage.getItem('user');
     this.fetchApiData.getUser(user).subscribe((resp: any) => {
@@ -38,6 +55,10 @@ export class EditProfileComponent implements OnInit {
     })
   }
 
+  /**
+   * Updates the infor of the user, sneding the data to the backend.
+   * A snack bar element is shown, contianing the result of the operation
+   */
   editUserProfile(): void {
     const updatedUserData = {
       Username: !this.userData.Username
@@ -65,21 +86,4 @@ export class EditProfileComponent implements OnInit {
       });
     }
   }
-
-
-  // loginUser(): void {
-  //   this.fetchApiData.userLogin(this.userData).subscribe((result) => {
-  //     this.dialogRef.close();
-  //     console.log(result);
-  //     this.snackBar.open("You are now logged in", 'OK', {
-  //       duration: 4000
-  //     });
-  //     this.router.navigate(['movies']);
-  //   }, (result) => {
-  //     console.log(result)
-  //     this.snackBar.open("Something went wrong", 'OK', {
-  //       duration: 4000
-  //     });
-  //   });
-  // }
 }
