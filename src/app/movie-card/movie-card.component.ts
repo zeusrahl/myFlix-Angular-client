@@ -108,7 +108,7 @@ export class MovieCardComponent implements OnInit {
       });
       this.ngOnInit();
     });
-    return this.getFav();
+    // return this.getFav();
   }
 
   /**
@@ -125,7 +125,7 @@ export class MovieCardComponent implements OnInit {
       });
     });
     this.ngOnInit();
-    return this.getFav();
+    // return this.getFav();
   }
 
   /**

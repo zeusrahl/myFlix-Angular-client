@@ -49,7 +49,7 @@ export class UserProfileComponent implements OnInit {
     this.fetchApiData.getUser(user).subscribe((resp: any) => {
       this.user = resp;
       console.log(this.user);
-      return this.user
+      // return this.user
     });
   }
 
@@ -63,6 +63,7 @@ export class UserProfileComponent implements OnInit {
       console.log(this.favorites);
       return this.filterMovies();
     });
+    // this.ngOnInit();
   }
 
   /**
@@ -76,6 +77,7 @@ export class UserProfileComponent implements OnInit {
       }
     });
     console.log(this.favMov);
+  
     return this.favMov;
   }
 
@@ -145,8 +147,11 @@ export class UserProfileComponent implements OnInit {
       this.snackBar.open(`You successfully removed ${title} from your favorites list`, 'OK', {
         duration: 4000,
       });
+      // setTimeout(function () {
+      //   window.location.reload();
+      // }, 1000);
     });
-    this.ngOnInit();
-    return this.getFav();
+    // this.ngOnInit();
+    // return this.getFav();
   }
 }
