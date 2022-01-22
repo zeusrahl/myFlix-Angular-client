@@ -27,7 +27,7 @@
     <mat-card *ngFor="let movie of favMov;" class="mainCard">
       <mat-card-header><h1>{{movie.Title}}</h1></mat-card-header>
       <mat-card-content>
-        <img src="{{movie.ImagePath}}" alt="{{movie.Title}}" class="img"/>
+        <img src="{{movie.ImagePath}}" alt="{{movie.Title}}" class="img-responsive" style="max-height: 400px;"/>
       </mat-card-content>
       <mat-card-actions>
         <button
@@ -62,13 +62,23 @@
             Genre
           </button>
           <mat-icon
-            (click)="removeFavMovie(
-              movie._id,
-              movie.Title
-            )"
-          >
-            favorite
-          </mat-icon>
+          *ngIf="!inFavorites(movie._id)"
+          (click)="addFavMovie(
+            movie._id,
+            movie.Title
+          )"
+        >
+          favorite_border
+        </mat-icon>
+        <mat-icon
+          *ngIf="inFavorites(movie._id)"
+          (click)="removeFavMovie(
+            movie._id,
+            movie.Title
+          )"
+        >
+          favorite
+        </mat-icon>
       </mat-card-actions>
       
     </mat-card>

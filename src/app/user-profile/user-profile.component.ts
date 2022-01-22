@@ -136,6 +136,23 @@ export class UserProfileComponent implements OnInit {
   }
 
   /**
+   * Adds movie to userData's FavoriteMovies
+   * @param movieId {string}
+   * @param title {string}
+   * @returns function this.getFav()
+   */
+   addFavMovie(movieId: string, title: string): void {
+    this.fetchApiData.addFavoriteMovies(movieId).subscribe((resp: any) => {
+      console.log(resp);
+      this.snackBar.open(`You added ${title} to your favorites list`, 'OK', {
+        duration: 4000,
+      });
+      this.ngOnInit();
+    });
+    // return this.getFav();
+  }
+  
+  /**
    * Removes favorite movie from User's array in DB.
    * @param movieId {string}
    * @param title {string}
@@ -153,5 +170,13 @@ export class UserProfileComponent implements OnInit {
     });
     // this.ngOnInit();
     // return this.getFav();
+  }
+
+  inFavorites(movieId: any): boolean {
+    if (this.favorites.indexOf(movieId) > -1) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

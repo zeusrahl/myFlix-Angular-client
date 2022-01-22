@@ -1,12 +1,12 @@
 <app-nav-bar></app-nav-bar>
-<div style="display: flex; flex-wrap:wrap">
+<div class="movie-cards">
   <mat-card *ngFor="let movie of movies; let i=index;" style="flex: 1 1 auto;">
     <mat-dialog-content>
       <mat-card-header>
         <mat-card-title>{{movie.Title}}</mat-card-title>
         <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
       </mat-card-header>
-      <img src={{movie.ImagePath}} alt={{movie.Title}} />
+      <img src={{movie.ImagePath}} alt={{movie.Title}} class="img-responsive" style="max-height: 400px;"/>
       <mat-card-actions>
         <button
           mat-raised-button
