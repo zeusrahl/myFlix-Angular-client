@@ -151,15 +151,21 @@ export class UserProfileComponent implements OnInit {
     });
     // return this.getFav();
   }
-  
+
   /**
    * Removes favorite movie from User's array in DB.
    * @param movieId {string}
    * @param title {string}
    * @returns function this.getFav()
    */
-  removeFavMovie(movieId: any, title: string): void {
+  removeFavMovie(movieId: any, title: string, movie: any): void {
     this.fetchApiData.deleteMovie(movieId).subscribe((resp: any) => {
+      const index = this.favMov.indexOf(movie);
+      if (index > -1) {
+        this.favMov.splice(index, 1);
+      }
+      console.log(index);
+      console.log(this.favMov);
       console.log(resp);
       this.snackBar.open(`You successfully removed ${title} from your favorites list`, 'OK', {
         duration: 4000,

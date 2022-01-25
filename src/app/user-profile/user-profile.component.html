@@ -23,8 +23,8 @@
 </div>
 <div class="fav-wrapper">
   <h2 class="header">Your Favorites</h2>
-  <div style="display: flex; flex-wrap:wrap">
-    <mat-card *ngFor="let movie of favMov;" class="mainCard">
+  <div style="display: flex; flex-wrap:wrap; justify-content: center;">
+    <mat-card *ngFor="let movie of favMov;" class="mainCard" style="flex: 1 1 auto;">
       <mat-card-header><h1>{{movie.Title}}</h1></mat-card-header>
       <mat-card-content>
         <img src="{{movie.ImagePath}}" alt="{{movie.Title}}" class="img-responsive" style="max-height: 400px;"/>
@@ -74,13 +74,13 @@
           *ngIf="inFavorites(movie._id)"
           (click)="removeFavMovie(
             movie._id,
-            movie.Title
+            movie.Title,
+            movie
           )"
         >
           favorite
         </mat-icon>
-      </mat-card-actions>
-      
+      </mat-card-actions>      
     </mat-card>
   </div>
   
